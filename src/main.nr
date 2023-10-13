@@ -12,8 +12,8 @@ struct GriffinConfig<S, R, A> {
     rc: [[Field; S]; R],
 }
 
-fn main(mut input: [Field; 3]) -> pub Field {
+fn main(mut input: [Field; 8]) -> pub Field {
     //permute_4(config, input)
-    crate::bn254::hash_3(input)
+    crate::bn254::hash_8(input)
 
 }
