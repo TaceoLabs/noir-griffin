@@ -60,12 +60,29 @@ fn test_permute_3() {
 }
 
 #[test]
+fn test_permute_3_2() {
+    let result = x5_3([1,2,3]);
+    assert(result[0] == 0x2fb6bd1c2c6d0517d3dcef5705d8c7e19bff86738d76a40896cf06849c8cfb2f); 
+    assert(result[1] == 0x11f3bc1fe8167e3b823ca2b5085deafe82c8d67a6c1de7559d32de3981fd23cd); 
+    assert(result[2] == 0x16fcd78ab102650a8a664bb432790d3958a84c45c74b14917781f25ad66d70a8);
+}
+
+#[test]
 fn test_permute_4() {
     let result = x5_4([4,4,4,4]);
     assert(result[0] == 0x21e8a3f3dee45b03f8fe8c335c29acad668ce7a0fffd56526d42ced0d477117d);
     assert(result[1] == 0x0fce77f5bf5329997ebf10835add759bddc5348babd651bdb75dff717ec19851);
     assert(result[2] == 0x1596ac42297fbff53d6840d6bc03699ad5647ba6a58b16eebb0a89f4bd8b8b38);
     assert(result[3] == 0x08e39577f71c17d72c269f4fd3f37a3bfbc838e10f0397f731c070c20b3c0e6b);
+}
+
+#[test]
+fn test_permute_4_2() {
+    let result = x5_4([1,2,3,4]);
+    assert(result[0] == 0x011af2d3a0c9e8224b94c4258a1a3be54886409d5060cf0ff164dee208e48d45); 
+    assert(result[1] == 0x253e5bc2f44ac94b1532525c2c97580b6dd2435e5d8bf919c88b18e55c4967fe); 
+    assert(result[2] == 0x234c5aa9f2a5b9555b977fdd47cc14f5dbfc9b716412d2507777e21783c204f7); 
+    assert(result[3] == 0x2be141fbcfde5ca866dfca2f5569be5d7ad3bd6b27ebab997e62de18efcf0a53);
 }
 
 #[test]
@@ -81,6 +98,18 @@ fn test_permute_8() {
     assert(result[7] == 0x16e2d89f8e00b204ae028c161c120c941670290ac80f4d233bbf3f76820d070f);
 }
 
+#[test]
+fn test_permute_8_2() {
+    let result = x5_8([1,2,3,4,5,6,7,8]);
+    assert(result[0] == 0x058e4a08a32a0759faeb1eb7910ba1adad306c365f30e24838a0ae4d396f148e);
+    assert(result[1] == 0x2d2c2aa316608461914ddbcfd834ecfb9c580639995a7b395bfdf687b0430456);
+    assert(result[2] == 0x0faa5e0a8b8b88361ce7bfadb618a7972d706277700cd077c71d5d70b0014b8e);
+    assert(result[3] == 0x2aca5a3f3f7a876f96056333ed60efda360f87faf0b5d6c8ced97337297a7f84);
+    assert(result[4] == 0x22f156b01d16d8026b33ac43744ca649f5e1d55557a535ca26167865ee4401ed);
+    assert(result[5] == 0x2294d7914df7e53f3b1158ed6b98e5de7ed9cfc850b3a0359000b9c563053d1f);
+    assert(result[6] == 0x0b2226f2b57b78baa214dc4619ea63c3bdc6351fe7e661109279edc66308d0a0);
+    assert(result[7] == 0x2d27c100ae5d1ac64f7014a1e55b609186599c1b96ef675b687fb50e294eb5ed);
+}
 
 
 #[test]
