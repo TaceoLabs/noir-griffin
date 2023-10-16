@@ -4,7 +4,7 @@
 
 This repository contains a Noir crate implementing the zk-friendly hash function Griffin for Noir's native curve BN254.
 
-Griffin utilizes low-degree equivalence, optimized for fast prover times. These designs rely on the observation that it is possible to prove the heavy computation $y=x^{1/d}$ by constraining $y^d=x$. If $d$ is small (5 for this implementation) and the prime field is large, then $1/d$ is a considerably large exponent with many multiplications involved. Using the power map $y=x^{1/d}$ leads to fewer rounds to achieve a target security threshold.
+Griffin utilizes low-degree equivalence, optimized for fast prover times. These designs rely on the observation that it is possible to prove the heavy computation $y=x^{1/d}$ by constraining $y^d=x$. If $d$ is small (5 for this implementation) and the prime field is large, then $1/d$ is a considerably large exponent with many multiplications involved. Using the power map $y=x^{1/d}$ leads to fewer rounds necessary to achieve a target security threshold.
 
 Especially in contrast to older designs, which use the power map $y=x^d$ with a relatively small exponent (like Poseidon), Griffin has a drastically improved prover time. See the Performance section below.
 
