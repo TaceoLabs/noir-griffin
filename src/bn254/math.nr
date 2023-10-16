@@ -8,7 +8,7 @@ fn square(x: Field) -> Field {
     x * x
 }
 
-unconstrained fn mont_ladder(x: Field, exp: Field) -> Field {
+unconstrained fn mont_ladder_unconstrained(x: Field, exp: Field) -> Field {
     let exp_bits = exp.to_be_bits(256);
     let mut x1 = x;
     let mut x2 = x * x;
@@ -29,6 +29,12 @@ unconstrained fn mont_ladder(x: Field, exp: Field) -> Field {
         }
     }
     x1
+}
+
+fn mont_ladder<S, R, A>(config: GriffinConfig<S, R, A>, x: Field) -> Field {
+    let y = mont_ladder_unconstrained(x, config.d_inv);
+    assert(x == y.pow_32(config.d));
+    y
 }
 
 fn affine_first_mat(mut state: [Field; 4]) -> [Field; 4] {
@@ -55,8 +61,7 @@ fn affine<S>(mut state: [Field; S], rc: [Field; S], affine_mat: fn([Field; S]) -
 
 fn non_linear<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S]) -> [Field; S] {
     let mut output = state;
-    output[0] = mont_ladder(output[0], config.d_inv);
-    assert(state[0] == output[0].pow_32(config.d));
+    output[0] = mont_ladder(config, output[0]);
     output[1] = output[1].pow_32(config.d);
 
     let mut y01_i = output[0] + output[1];
@@ -98,7 +103,7 @@ fn permute<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S], affin
 #[test]
 fn inv_test() {
     let config = crate::bn254::consts::x5_4_config();
-    let inv = mont_ladder(42, config.d_inv);
+    let inv = mont_ladder(config, 42);
     assert(inv.pow_32(5) == 42);
 }
 

@@ -1,8 +1,5 @@
 use crate::GriffinConfig;
 
-global d: Field = 5;
-global d_inv: Field = 0x26b6a528b427b35493736af8679aad17535cb9d394945a0dcfe7f7a98ccccccd;
-
 fn x5_3_config() -> GriffinConfig<3,11,1> {
     GriffinConfig {
         d: 5,
@@ -32,7 +29,7 @@ fn x5_3_config() -> GriffinConfig<3,11,1> {
 }
 
 
-fn x5_4_config() -> GriffinConfig<4,10, 2> {
+fn x5_4_config() -> GriffinConfig<4,10,2> {
     GriffinConfig {
         d: 5,
         d_inv: 0x26b6a528b427b35493736af8679aad17535cb9d394945a0dcfe7f7a98ccccccd,

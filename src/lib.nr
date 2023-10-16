@@ -2,7 +2,7 @@ mod bn254;
 
 // S is state size {3,4,8}
 // R is rounds-1 (because first RC is zero)
-// A is S-2
+// A is S-2, used for the alpha, beta constants during the L-function
 struct GriffinConfig<S, R, A> {
     d: Field,
     d_inv: Field,
