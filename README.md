@@ -16,7 +16,7 @@ For further information, we refer to the [Griffin Paper](https://eprint.iacr.org
 
 We instantiated this Griffin instance with $d$=5 and hence $1/d=$`0x26b6a528b427b35493736af8679aad17535cb9d394945a0dcfe7f7a98ccccccd`.
 
-Griffin has an internal state size $s \in {3, 4t}$ for a positive integer $t$. We provide an implementation for state sizes 3, 4, and 8. The following table shows the constraints obtained by `nargo info` for our implementation and the corresponding hashes from the standard library that work on Field elements.
+Griffin has an internal state size $s \in \{3, 4t\}$ for a positive integer $t$. We provide an implementation for state sizes 3, 4, and 8. The following table shows the constraints obtained by `nargo info` for our implementation and the corresponding hashes from the standard library that work on Field elements.
 
 | Input | Griffin | Poseidon | Pedersen | mimc_bn254 | `hash_to_field` (blake2) |
 | ----- | ------- | -------- | -------- | ---------- | ------------------------ |
