@@ -45,4 +45,36 @@ griffin = { tag = "v0.1.0", git = "https://github.com/TaceoLabs/noir-griffin" }
 
 ## Examples
 
-You have to include
+To compute a hash from three Field elements, write:
+
+```Rust
+use dep::griffin;
+
+fn main(plains: [Field; 3]) -> pub Field {
+    griffin::bn254::hash_3(plains)
+}
+```
+
+We also provide function calls for hashing 4 and 8 Field elements, with the respective functions `griffin::bn254::hash_4([..])` and `griffin::bn254::hash_8([..])`.
+
+To use griffin in sponge mode, write:
+
+```Rust
+use dep::griffin;
+
+fn main(plains: [Field; 8]) -> pub [Field;4] {
+    griffin::bn254::sponge(plains)
+}
+```
+
+In this example, we absorb 8 Field elements and the output 4 elements. The API supports arbitrary long inputs and outputs $>0$.
+
+For further examples on how to use the Griffin crate, have a look in the `lib.nr` file in the `src/` directory and check the tests.
+
+## Rounds constants
+
+We used the same round constants like this [reference implementation](https://extgit.iaik.tugraz.at/krypto/zkfriendlyhashzoo/-/blob/33fe9952682eca1337ac7f947b9ebe366faeda9c/plain_impls/src/griffin/griffin_params.rs).
+
+## Disclaimer
+
+This is **experimental software** and is provided on an "as is" and "as available" basis. We do **not give any warranties** and will **not be liable for any losses** incurred through any use of this code base.

@@ -15,7 +15,7 @@ fn hash_8(input: [Field; 8]) -> Field {
 }
 
 
-fn griffin_sponge<I,O>(input: [Field; I]) -> [Field; O] {
+fn sponge<I,O>(input: [Field; I]) -> [Field; O] {
     //we hardcode with griffin-3 for the moment
     //therefore we have r=2, c=1
     if I == 1 {
