@@ -2,20 +2,20 @@ mod consts;
 mod perm;
 mod math;
 
-fn hash_3(input: [Field; 3]) -> Field {
+pub fn hash_3(input: [Field; 3]) -> Field {
     perm::x5_3(input)[0]
 }
 
-fn hash_4(input: [Field; 4]) -> Field {
+pub fn hash_4(input: [Field; 4]) -> Field {
     perm::x5_4(input)[0]
 }
 
-fn hash_8(input: [Field; 8]) -> Field {
+pub fn hash_8(input: [Field; 8]) -> Field {
     perm::x5_8(input)[0]
 }
 
 
-fn sponge<I,O>(input: [Field; I]) -> [Field; O] {
+pub fn sponge<I,O>(input: [Field; I]) -> [Field; O] {
     //we hardcode with griffin-3 for the moment
     //therefore we have r=2, c=1
     if I == 1 {
@@ -40,7 +40,7 @@ fn sponge<I,O>(input: [Field; I]) -> [Field; O] {
     }
 }
 
-fn squeeze<O>(mut state: [Field; 3]) -> [Field; O] {
+pub fn squeeze<O>(mut state: [Field; 3]) -> [Field; O] {
     if O == 1 {
         let mut out = [0; O];
         out[0] = state[0];

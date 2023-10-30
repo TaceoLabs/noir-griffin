@@ -1,6 +1,6 @@
 use crate::GriffinConfig;
 
-fn x5_3_config() -> GriffinConfig<3,11,1> {
+pub fn x5_3_config() -> GriffinConfig<3,11,1> {
     GriffinConfig {
         d: 5,
         d_inv: 0x26b6a528b427b35493736af8679aad17535cb9d394945a0dcfe7f7a98ccccccd,
@@ -29,7 +29,7 @@ fn x5_3_config() -> GriffinConfig<3,11,1> {
 }
 
 
-fn x5_4_config() -> GriffinConfig<4,10,2> {
+pub fn x5_4_config() -> GriffinConfig<4,10,2> {
     GriffinConfig {
         d: 5,
         d_inv: 0x26b6a528b427b35493736af8679aad17535cb9d394945a0dcfe7f7a98ccccccd,
@@ -58,7 +58,7 @@ fn x5_4_config() -> GriffinConfig<4,10,2> {
     }
 }
 
-fn x5_8_config() -> GriffinConfig<8,8,6> {
+pub fn x5_8_config() -> GriffinConfig<8,8,6> {
     GriffinConfig {
         d: 5,
         d_inv: 0x26b6a528b427b35493736af8679aad17535cb9d394945a0dcfe7f7a98ccccccd,

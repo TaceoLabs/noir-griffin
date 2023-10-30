@@ -2,7 +2,7 @@ use crate::bn254::consts;
 use crate::bn254::math::affine_first_mat;
 use crate::bn254::math::permute;
 
-fn x5_3(input: [Field; 3]) -> [Field; 3] {
+pub fn x5_3(input: [Field; 3]) -> [Field; 3] {
     let affine_3_mat = |state: [Field; 3]| {
         let sum = state.reduce(|a,b|a + b);
         state.map(|s|s+sum) 
@@ -10,7 +10,7 @@ fn x5_3(input: [Field; 3]) -> [Field; 3] {
     permute(consts::x5_3_config(), input, affine_3_mat)
 }
 
-fn x5_4(state: [Field; 4]) -> [Field; 4] {
+pub fn x5_4(state: [Field; 4]) -> [Field; 4] {
     permute(consts::x5_4_config(), state, affine_first_mat)
 }
 
@@ -45,7 +45,7 @@ fn affine_8_mat(mut state: [Field; 8]) -> [Field; 8] {
     ]
 }
 
-fn x5_8(state: [Field; 8]) -> [Field; 8] {
+pub fn x5_8(state: [Field; 8]) -> [Field; 8] {
     permute(consts::x5_8_config(), state, affine_8_mat)
 }
 
