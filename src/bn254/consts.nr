@@ -28,7 +28,6 @@ pub fn x5_3_config() -> GriffinConfig<3,11,1> {
     }
 }
 
-
 pub fn x5_4_config() -> GriffinConfig<4,10,2> {
     GriffinConfig {
         d: 5,

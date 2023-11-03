@@ -116,7 +116,6 @@ fn test_non_linear_3() {
     assert(result[2] == 0x19ab83c7ee1aff2a678f1a04ca74ed6ef32d88e022bf98c030429a37bfd467ce);
 }
 
-
 #[test]
 fn test_non_linear_4() {
     let config = crate::bn254::consts::x5_4_config();
