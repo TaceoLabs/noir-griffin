@@ -1,5 +1,6 @@
 use crate::GriffinConfig;
 
+#[field(bn254)]
 pub fn x5_3_config() -> GriffinConfig<3,11,1> {
     GriffinConfig {
         d: 5,
@@ -28,6 +29,7 @@ pub fn x5_3_config() -> GriffinConfig<3,11,1> {
     }
 }
 
+#[field(bn254)]
 pub fn x5_4_config() -> GriffinConfig<4,10,2> {
     GriffinConfig {
         d: 5,
@@ -57,6 +59,7 @@ pub fn x5_4_config() -> GriffinConfig<4,10,2> {
     }
 }
 
+#[field(bn254)]
 pub fn x5_8_config() -> GriffinConfig<8,8,6> {
     GriffinConfig {
         d: 5,

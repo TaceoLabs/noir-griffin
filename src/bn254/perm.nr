@@ -2,6 +2,7 @@ use crate::bn254::consts;
 use crate::bn254::math::affine_first_mat;
 use crate::bn254::math::permute;
 
+#[field(bn254)]
 pub fn x5_3(input: [Field; 3]) -> [Field; 3] {
     let affine_3_mat = |state: [Field; 3]| {
         let sum = state.reduce(|a,b|a + b);
@@ -10,10 +11,12 @@ pub fn x5_3(input: [Field; 3]) -> [Field; 3] {
     permute(consts::x5_3_config(), input, affine_3_mat)
 }
 
+#[field(bn254)]
 pub fn x5_4(state: [Field; 4]) -> [Field; 4] {
     permute(consts::x5_4_config(), state, affine_first_mat)
 }
 
+#[field(bn254)]
 fn affine_8_mat(mut state: [Field; 8]) -> [Field; 8] {
     //first matrix
     let mut first_four = affine_first_mat([state[0],state[1],state[2],state[3]]);
@@ -36,6 +39,7 @@ fn affine_8_mat(mut state: [Field; 8]) -> [Field; 8] {
     [state[0] + first_four[0], state[1] + first_four[1], state[2] + first_four[2], state[3] + first_four[3], state[4] + first_four[0], state[5] + first_four[1], state[6] + first_four[2], state[7] + first_four[3]]
 }
 
+#[field(bn254)]
 pub fn x5_8(state: [Field; 8]) -> [Field; 8] {
     permute(consts::x5_8_config(), state, affine_8_mat)
 }
