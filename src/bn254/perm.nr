@@ -16,7 +16,6 @@ pub fn x5_4(state: [Field; 4]) -> [Field; 4] {
     permute(consts::x5_4_config(), state, affine_first_mat)
 }
 
-#[field(bn254)]
 fn affine_8_mat(mut state: [Field; 8]) -> [Field; 8] {
     //first matrix
     let mut first_four = affine_first_mat([state[0],state[1],state[2],state[3]]);
