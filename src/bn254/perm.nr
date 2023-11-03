@@ -2,7 +2,8 @@ use crate::bn254::consts;
 use crate::bn254::math::affine_first_mat;
 use crate::bn254::math::permute;
 
-fn x5_3(input: [Field; 3]) -> [Field; 3] {
+#[field(bn254)]
+pub fn x5_3(input: [Field; 3]) -> [Field; 3] {
     let affine_3_mat = |state: [Field; 3]| {
         let sum = state.reduce(|a,b|a + b);
         state.map(|s|s+sum) 
@@ -10,7 +11,8 @@ fn x5_3(input: [Field; 3]) -> [Field; 3] {
     permute(consts::x5_3_config(), input, affine_3_mat)
 }
 
-fn x5_4(state: [Field; 4]) -> [Field; 4] {
+#[field(bn254)]
+pub fn x5_4(state: [Field; 4]) -> [Field; 4] {
     permute(consts::x5_4_config(), state, affine_first_mat)
 }
 
@@ -33,23 +35,13 @@ fn affine_8_mat(mut state: [Field; 8]) -> [Field; 8] {
     first_four[1] += second_four[1];
     first_four[2] += second_four[2];
     first_four[3] += second_four[3];
-    [
-        state[0] + first_four[0],
-        state[1] + first_four[1],
-        state[2] + first_four[2],
-        state[3] + first_four[3],
-        state[4] + first_four[0],
-        state[5] + first_four[1],
-        state[6] + first_four[2],
-        state[7] + first_four[3],
-    ]
+    [state[0] + first_four[0], state[1] + first_four[1], state[2] + first_four[2], state[3] + first_four[3], state[4] + first_four[0], state[5] + first_four[1], state[6] + first_four[2], state[7] + first_four[3]]
 }
 
-fn x5_8(state: [Field; 8]) -> [Field; 8] {
+#[field(bn254)]
+pub fn x5_8(state: [Field; 8]) -> [Field; 8] {
     permute(consts::x5_8_config(), state, affine_8_mat)
 }
-
-
 
 #[test]
 fn test_permute_3() {
@@ -110,7 +102,6 @@ fn test_permute_8_2() {
     assert(result[6] == 0x0b2226f2b57b78baa214dc4619ea63c3bdc6351fe7e661109279edc66308d0a0);
     assert(result[7] == 0x2d27c100ae5d1ac64f7014a1e55b609186599c1b96ef675b687fb50e294eb5ed);
 }
-
 
 #[test]
 fn test_affine_8_mat() {
