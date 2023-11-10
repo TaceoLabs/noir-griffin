@@ -44,7 +44,7 @@ pub fn sponge<I,O>(input: [Field; I]) -> [Field; O] {
 }
 
 #[field(bn254)]
-pub fn squeeze<O>(mut state: [Field; 3]) -> [Field; O] {
+pub(crate) fn squeeze<O>(mut state: [Field; 3]) -> [Field; O] {
     if O == 1 {
         let mut out = [0; O];
         out[0] = state[0];

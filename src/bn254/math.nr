@@ -38,7 +38,7 @@ fn mont_ladder<S, R, A>(config: GriffinConfig<S, R, A>, x: Field) -> Field {
 }
 
 #[field(bn254)]
-pub fn affine_first_mat(mut state: [Field; 4]) -> [Field; 4] {
+pub(crate) fn affine_first_mat(mut state: [Field; 4]) -> [Field; 4] {
     let t_0 = state[0] + state[1];
     let t_1 = state[2] + state[3];
     let t_2 = double(state[1]) + t_1;
@@ -53,7 +53,7 @@ pub fn affine_first_mat(mut state: [Field; 4]) -> [Field; 4] {
 }
 
 #[field(bn254)]
-pub fn affine<S>(mut state: [Field; S], rc: [Field; S], affine_mat: fn([Field; S]) -> [Field; S]) -> [Field; S] {
+pub(crate) fn affine<S>(mut state: [Field; S], rc: [Field; S], affine_mat: fn([Field; S]) -> [Field; S]) -> [Field; S] {
     state = affine_mat(state);
     for i in 0..S {
         state[i] += rc[i];
@@ -90,7 +90,7 @@ fn non_linear<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S]) ->
 }
 
 #[field(bn254)]
-pub fn permute<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S], affine_mat: fn([Field; S]) -> [Field; S]) -> [Field; S] {
+pub(crate) fn permute<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S], affine_mat: fn([Field; S]) -> [Field; S]) -> [Field; S] {
     //no round constant
     state = affine_mat(state);
     for r in 0..R {
