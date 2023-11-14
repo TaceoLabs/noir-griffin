@@ -18,8 +18,8 @@ pub fn x5_4(state: [Field; 4]) -> [Field; 4] {
 
 fn affine_8_mat(mut state: [Field; 8]) -> [Field; 8] {
     //first matrix
-    let mut first_four = affine_first_mat([state[0],state[1],state[2],state[3]]);
-    let second_four = affine_first_mat([state[4],state[5],state[6],state[7]]);
+    let mut first_four = affine_first_mat([state[0], state[1], state[2], state[3]]);
+    let second_four = affine_first_mat([state[4], state[5], state[6], state[7]]);
     state = [
         first_four[0],
         first_four[1],
@@ -30,12 +30,20 @@ fn affine_8_mat(mut state: [Field; 8]) -> [Field; 8] {
         second_four[2],
         second_four[3],
     ];
+
     //second matrix
     first_four[0] += second_four[0];
     first_four[1] += second_four[1];
     first_four[2] += second_four[2];
     first_four[3] += second_four[3];
-    [state[0] + first_four[0], state[1] + first_four[1], state[2] + first_four[2], state[3] + first_four[3], state[4] + first_four[0], state[5] + first_four[1], state[6] + first_four[2], state[7] + first_four[3]]
+    [state[0] + first_four[0],
+        state[1] + first_four[1],
+        state[2] + first_four[2],
+        state[3] + first_four[3],
+        state[4] + first_four[0],
+        state[5] + first_four[1],
+        state[6] + first_four[2],
+        state[7] + first_four[3]]
 }
 
 #[field(bn254)]
@@ -45,7 +53,7 @@ pub fn x5_8(state: [Field; 8]) -> [Field; 8] {
 
 #[test]
 fn test_permute_3() {
-    let result = x5_3([3,3,3]);
+    let result = x5_3([3, 3, 3]);
     assert(result[0] == 0x132087f636e0e40cfeaa84b07adc71914fb0e162b4214f822aeb18bccce1597c);
     assert(result[1] == 0x22574d8ab0860bad1fc61838e45a80ebd629b786cf3bc982a443f3efee3fa5e7);
     assert(result[2] == 0x26dd774a06d568501694921eaffa2f8846676cd7738a43d17803f46afcf0d34f);
@@ -53,15 +61,15 @@ fn test_permute_3() {
 
 #[test]
 fn test_permute_3_2() {
-    let result = x5_3([1,2,3]);
-    assert(result[0] == 0x2fb6bd1c2c6d0517d3dcef5705d8c7e19bff86738d76a40896cf06849c8cfb2f); 
-    assert(result[1] == 0x11f3bc1fe8167e3b823ca2b5085deafe82c8d67a6c1de7559d32de3981fd23cd); 
+    let result = x5_3([1, 2, 3]);
+    assert(result[0] == 0x2fb6bd1c2c6d0517d3dcef5705d8c7e19bff86738d76a40896cf06849c8cfb2f);
+    assert(result[1] == 0x11f3bc1fe8167e3b823ca2b5085deafe82c8d67a6c1de7559d32de3981fd23cd);
     assert(result[2] == 0x16fcd78ab102650a8a664bb432790d3958a84c45c74b14917781f25ad66d70a8);
 }
 
 #[test]
 fn test_permute_4() {
-    let result = x5_4([4,4,4,4]);
+    let result = x5_4([4, 4, 4, 4]);
     assert(result[0] == 0x21e8a3f3dee45b03f8fe8c335c29acad668ce7a0fffd56526d42ced0d477117d);
     assert(result[1] == 0x0fce77f5bf5329997ebf10835add759bddc5348babd651bdb75dff717ec19851);
     assert(result[2] == 0x1596ac42297fbff53d6840d6bc03699ad5647ba6a58b16eebb0a89f4bd8b8b38);
@@ -70,16 +78,16 @@ fn test_permute_4() {
 
 #[test]
 fn test_permute_4_2() {
-    let result = x5_4([1,2,3,4]);
-    assert(result[0] == 0x011af2d3a0c9e8224b94c4258a1a3be54886409d5060cf0ff164dee208e48d45); 
-    assert(result[1] == 0x253e5bc2f44ac94b1532525c2c97580b6dd2435e5d8bf919c88b18e55c4967fe); 
-    assert(result[2] == 0x234c5aa9f2a5b9555b977fdd47cc14f5dbfc9b716412d2507777e21783c204f7); 
+    let result = x5_4([1, 2, 3, 4]);
+    assert(result[0] == 0x011af2d3a0c9e8224b94c4258a1a3be54886409d5060cf0ff164dee208e48d45);
+    assert(result[1] == 0x253e5bc2f44ac94b1532525c2c97580b6dd2435e5d8bf919c88b18e55c4967fe);
+    assert(result[2] == 0x234c5aa9f2a5b9555b977fdd47cc14f5dbfc9b716412d2507777e21783c204f7);
     assert(result[3] == 0x2be141fbcfde5ca866dfca2f5569be5d7ad3bd6b27ebab997e62de18efcf0a53);
 }
 
 #[test]
 fn test_permute_8() {
-    let result = x5_8([8,8,8,8,8,8,8,8]);
+    let result = x5_8([8, 8, 8, 8, 8, 8, 8, 8]);
     assert(result[0] == 0x292fb992bfd959e28d73266e8e1b8b13f1c36cd9fe08f47689c01f5813a90c33);
     assert(result[1] == 0x15be7e7b4b313ce60976096b41ce9e6f3fd286db341bd79d9b8cecf69fbbc0fa);
     assert(result[2] == 0x25f95734d968ef69612ed123949a67230955daca1993bca94e857bb1c421fe5f);
@@ -92,7 +100,7 @@ fn test_permute_8() {
 
 #[test]
 fn test_permute_8_2() {
-    let result = x5_8([1,2,3,4,5,6,7,8]);
+    let result = x5_8([1, 2, 3, 4, 5, 6, 7, 8]);
     assert(result[0] == 0x058e4a08a32a0759faeb1eb7910ba1adad306c365f30e24838a0ae4d396f148e);
     assert(result[1] == 0x2d2c2aa316608461914ddbcfd834ecfb9c580639995a7b395bfdf687b0430456);
     assert(result[2] == 0x0faa5e0a8b8b88361ce7bfadb618a7972d706277700cd077c71d5d70b0014b8e);
@@ -105,5 +113,5 @@ fn test_permute_8_2() {
 
 #[test]
 fn test_affine_8_mat() {
-    assert([0x0180, 0x0120, 0x0180, 0x0120, 0x0180, 0x0120, 0x0180, 0x0120] == affine_8_mat([8,8,8,8,8,8,8,8]));
+    assert([0x0180, 0x0120, 0x0180, 0x0120, 0x0180, 0x0120, 0x0180, 0x0120] == affine_8_mat([8, 8, 8, 8, 8, 8, 8, 8]));
 }

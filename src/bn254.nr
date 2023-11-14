@@ -29,7 +29,7 @@ pub fn sponge<I,O>(input: [Field; I]) -> [Field; O] {
         for i in 2..I {
             state[counter] += input[i];
             counter += 1;
-            if counter == 2  {
+            if counter == 2 {
                 //absorb on every second element
                 state = perm::x5_3(state);
                 counter = 0;
@@ -38,7 +38,7 @@ pub fn sponge<I,O>(input: [Field; I]) -> [Field; O] {
         if counter != 0 {
             //we need to squeeze one more
             state = perm::x5_3(state);
-        } 
+        }
         squeeze(state)
     }
 }
@@ -61,7 +61,7 @@ pub(crate) fn squeeze<O>(mut state: [Field; 3]) -> [Field; O] {
         let mut counter = 2;
 
         for i in 2..O {
-            if counter == 2  {
+            if counter == 2 {
                 //squeeze on every second element
                 state = perm::x5_3(state);
                 counter = 0;
