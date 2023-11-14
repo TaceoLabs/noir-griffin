@@ -42,7 +42,7 @@ In your `Nargo.toml` file, add the following dependency:
 
 ```toml
 [dependencies]
-griffin = { tag = "v0.2.0", git = "https://github.com/TaceoLabs/noir-griffin" }
+griffin = { tag = "v0.3.0", git = "https://github.com/TaceoLabs/noir-griffin" }
 ```
 
 ## Examples

@@ -21,11 +21,9 @@ unconstrained fn mont_ladder_unconstrained(x: Field, exp: Field) -> Field {
                 x1 = x1 * x2;
                 x2 = x2 * x2;
             }
-        } else {
-            if found {
-                x2 = x1 * x2;
-                x1 = x1 * x1;
-            }
+        } else if found {
+            x2 = x1 * x2;
+            x1 = x1 * x1;
         }
     }
     x1
@@ -38,7 +36,7 @@ fn mont_ladder<S, R, A>(config: GriffinConfig<S, R, A>, x: Field) -> Field {
 }
 
 #[field(bn254)]
-pub fn affine_first_mat(mut state: [Field; 4]) -> [Field; 4] {
+pub(crate) fn affine_first_mat(mut state: [Field; 4]) -> [Field; 4] {
     let t_0 = state[0] + state[1];
     let t_1 = state[2] + state[3];
     let t_2 = double(state[1]) + t_1;
@@ -53,7 +51,7 @@ pub fn affine_first_mat(mut state: [Field; 4]) -> [Field; 4] {
 }
 
 #[field(bn254)]
-pub fn affine<S>(mut state: [Field; S], rc: [Field; S], affine_mat: fn([Field; S]) -> [Field; S]) -> [Field; S] {
+pub(crate) fn affine<S>(mut state: [Field; S], rc: [Field; S], affine_mat: fn([Field; S]) -> [Field; S]) -> [Field; S] {
     state = affine_mat(state);
     for i in 0..S {
         state[i] += rc[i];
@@ -79,7 +77,7 @@ fn non_linear<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S]) ->
 
     for r in 3..S {
         y01_i += y0;
-        let mut l = y01_i + state[r-1];
+        let mut l = y01_i + state[r - 1];
         let l_square = square(l);
         l *= config.alpha_beta[r-2][0];
         l += l_square;
@@ -90,7 +88,7 @@ fn non_linear<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S]) ->
 }
 
 #[field(bn254)]
-pub fn permute<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S], affine_mat: fn([Field; S]) -> [Field; S]) -> [Field; S] {
+pub(crate) fn permute<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S], affine_mat: fn([Field; S]) -> [Field; S]) -> [Field; S] {
     //no round constant
     state = affine_mat(state);
     for r in 0..R {
@@ -98,6 +96,7 @@ pub fn permute<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S], a
         state = affine(state, config.rc[r], affine_mat);
     }
     state = non_linear(config, state);
+
     //no round constant
     state = affine_mat(state);
     state
@@ -113,7 +112,7 @@ fn inv_test() {
 #[test]
 fn test_non_linear_3() {
     let config = crate::bn254::consts::x5_3_config();
-    let result = non_linear(config, [0x0c,0x0c,0x0c]);
+    let result = non_linear(config, [0x0c, 0x0c, 0x0c]);
     assert(result[0] == 0x2cb96829983dc5a607843ff245abcc153381cc87fc7a322181e8ea7a33f2da15);
     assert(result[1] == 0x000000000000000000000000000000000000000000000000000000000003cc00);
     assert(result[2] == 0x19ab83c7ee1aff2a678f1a04ca74ed6ef32d88e022bf98c030429a37bfd467ce);
@@ -122,7 +121,7 @@ fn test_non_linear_3() {
 #[test]
 fn test_non_linear_4() {
     let config = crate::bn254::consts::x5_4_config();
-    let result = non_linear(config, [0x40,0x30,0x40,0x30]);
+    let result = non_linear(config, [0x40, 0x30, 0x40, 0x30]);
     assert(result[0] == 0x2583d7714e3b74553fece7da4af7bfca52635c47d955dc108188ceb122f18c4c);
     assert(result[1] == 0x0f300000);
     assert(result[2] == 0x0bbd4148554f2b6d810e78c71f3aa53cdd4484c2a2500b8401da572b7f7ff5ef);
