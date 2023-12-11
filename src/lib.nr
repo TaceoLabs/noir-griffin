@@ -7,7 +7,6 @@ struct GriffinConfig<S, R, A> {
     d: Field,
     d_inv: Field,
     alpha_beta: [[Field; 2];A],
-    mat: [[Field; S]; S],
     rc: [[Field; S]; R],
 }
 
