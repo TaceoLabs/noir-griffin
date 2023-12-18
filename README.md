@@ -20,19 +20,19 @@ Griffin has an internal state size $s \in \\{3, 4t\\}$ for a positive integer $t
 
 | Input | Griffin | Poseidon | Pedersen | mimc_bn254 | `hash_to_field` (blake2) |
 | ----- | ------- | -------- | -------- | ---------- | ------------------------ |
-| 3     | 172     | 2280     | 3112     | 1375       | 8958                     |
-| 4     | 279     | 2751     | 3260     | 1927       | 9088                     |
-| 8     | 591     | 3938     | 3848     | 4506       | 15287                    |
+| 3     | 205     | 2280     | 3112     | 1375       | 8958                     |
+| 4     | 284     | 2751     | 3260     | 1927       | 9088                     |
+| 8     | 596     | 3938     | 3848     | 4506       | 15287                    |
 
 Griffin heavily outperforms its peers for all instantiations. We also compare Griffin in sponge mode with Poseidon in sponge mode as provided by the standard library in the following table:
 
 | Input | Griffin | Poseidon |
 | ----- | ------- | -------- |
-| 1     | 168     | 2728     |
-| 2     | 269     | 2733     |
-| 4     | 548     | 2751     |
-| 8     | 1106    | 5525     |
-| 16    | 2222    | 11073    |
+| 1     | 201     | 2728     |
+| 2     | 320     | 2733     |
+| 4     | 645     | 2751     |
+| 8     | 1295    | 5525     |
+| 16    | 2595    | 11073    |
 
 **Note**: Our sponge API allows an arbitrarily long output stream. The sponge implementation from the standard library only allows a single output Field (version 0.10.5). Therefore, we compare the performance with a single output element.
 
@@ -76,6 +76,10 @@ For further examples on how to use the Griffin crate, have a look in the `lib.nr
 ## Rounds constants
 
 We used the same round constants like this [reference implementation](https://extgit.iaik.tugraz.at/krypto/zkfriendlyhashzoo/-/blob/33fe9952682eca1337ac7f947b9ebe366faeda9c/plain_impls/src/griffin/griffin_params.rs).
+
+### Update on 18 December 2023
+
+In December 2023, the Griffin paper was updated which patches the amount of rounds from 12 to 14 for state size 3. We incorporated this starting with version v0.4.0. Please do not use the older versions any longer as they derive from the updated paper.
 
 ## Disclaimer
 
