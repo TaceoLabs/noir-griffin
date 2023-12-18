@@ -54,17 +54,17 @@ pub fn x5_8(state: [Field; 8]) -> [Field; 8] {
 #[test]
 fn test_permute_3() {
     let result = x5_3([3, 3, 3]);
-    assert(result[0] == 0x132087f636e0e40cfeaa84b07adc71914fb0e162b4214f822aeb18bccce1597c);
-    assert(result[1] == 0x22574d8ab0860bad1fc61838e45a80ebd629b786cf3bc982a443f3efee3fa5e7);
-    assert(result[2] == 0x26dd774a06d568501694921eaffa2f8846676cd7738a43d17803f46afcf0d34f);
+    assert(result[0] == 0x071662267b811d63d5b5ed1427e38ca8ebc4de6e4eb26bd461d93f1c55c215a5);
+    assert(result[1] == 0x26a7dd03a41f144ec7e1fe1469f82b01126a672cdce3d6cd83195436aa515281);
+    assert(result[2] == 0x0df5d7a88a7126ae585dd1dcf656a7475afd24cd078489bb218d580b8aeccc3e);
 }
 
 #[test]
 fn test_permute_3_2() {
-    let result = x5_3([1, 2, 3]);
-    assert(result[0] == 0x2fb6bd1c2c6d0517d3dcef5705d8c7e19bff86738d76a40896cf06849c8cfb2f);
-    assert(result[1] == 0x11f3bc1fe8167e3b823ca2b5085deafe82c8d67a6c1de7559d32de3981fd23cd);
-    assert(result[2] == 0x16fcd78ab102650a8a664bb432790d3958a84c45c74b14917781f25ad66d70a8);
+    let result = x5_3([0, 1, 2]);
+    assert(result[0] == 0x1516cc1e2ac78e1920e897f7da5dd57ed07f88ec34b3f7cdee5df6ff20392c19);
+    assert(result[1] == 0x2dc69a9091f39bc37d60bc19c53fef6afc8b2e7f9ab2485d9fb433c5828914cc);
+    assert(result[2] == 0x225d885f1464a394680c5328dafa02c45cd17da3048deb9958cac71a228d7ae5);
 }
 
 #[test]

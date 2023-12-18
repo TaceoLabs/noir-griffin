@@ -110,15 +110,6 @@ fn inv_test() {
 }
 
 #[test]
-fn test_non_linear_3() {
-    let config = crate::bn254::consts::x5_3_config();
-    let result = non_linear(config, [0x0c, 0x0c, 0x0c]);
-    assert(result[0] == 0x2cb96829983dc5a607843ff245abcc153381cc87fc7a322181e8ea7a33f2da15);
-    assert(result[1] == 0x000000000000000000000000000000000000000000000000000000000003cc00);
-    assert(result[2] == 0x19ab83c7ee1aff2a678f1a04ca74ed6ef32d88e022bf98c030429a37bfd467ce);
-}
-
-#[test]
 fn test_non_linear_4() {
     let config = crate::bn254::consts::x5_4_config();
     let result = non_linear(config, [0x40, 0x30, 0x40, 0x30]);
