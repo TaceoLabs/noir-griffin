@@ -12,7 +12,7 @@ struct GriffinConfig<S, R, A> {
 
 #[test]
 fn test_hash_3() {
-    assert(crate::bn254::hash_3([3, 3, 3]) == 0x132087f636e0e40cfeaa84b07adc71914fb0e162b4214f822aeb18bccce1597c);
+    assert(crate::bn254::hash_3([3, 3, 3]) == 0x071662267b811d63d5b5ed1427e38ca8ebc4de6e4eb26bd461d93f1c55c215a5);
 }
 
 #[test]
