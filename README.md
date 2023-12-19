@@ -79,7 +79,7 @@ We used the same round constants like this [reference implementation](https://ex
 
 ### Update on 18 December 2023
 
-In December 2023, the Griffin paper was updated which patches the amount of rounds from 12 to 14 for state size 3. We incorporated this starting with version v0.4.0. Please do not use the older versions any longer as they derive from the updated paper.
+In December 2023, the Griffin paper was updated with changes that increase the number of rounds from 12 to 14 for state size 3. We incorporated this starting with version v0.4.0. Please do not use the older versions any longer as their parameters are taken from the old paper.
 
 ## Disclaimer
 
