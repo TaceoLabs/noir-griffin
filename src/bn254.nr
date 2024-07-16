@@ -18,7 +18,7 @@ pub fn hash_8(input: [Field; 8]) -> Field {
 }
 
 #[field(bn254)]
-pub fn sponge<I,O>(input: [Field; I]) -> [Field; O] {
+pub fn sponge<I, O>(input: [Field; I]) -> [Field; O] {
     //we hardcode with griffin-3 for the moment
     //therefore we have r=2, c=1
     if I == 1 {
@@ -26,7 +26,7 @@ pub fn sponge<I,O>(input: [Field; I]) -> [Field; O] {
     } else {
         let mut state = perm::x5_3([input[0], input[1], I]);
         let mut counter = 0;
-        for i in 2..I {
+        for i in 2..I as u64 {
             state[counter] += input[i];
             counter += 1;
             if counter == 2 {
