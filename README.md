@@ -1,3 +1,7 @@
+# DISCLAIMER (11.11.2024)
+
+We recommend against using Griffin for all future use cases. An attack paper on the family of hash functions that Griffin belongs to was [published in Summer 2024](https://eprint.iacr.org/2024/347.pdf). We recommend using [Poseidon2](https://github.com/TaceoLabs/noir-poseidon/tree/main/poseidon2).
+
 # Noir-Griffin for BN254
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
