@@ -9,7 +9,7 @@ fn square(x: Field) -> Field {
 }
 
 unconstrained fn mont_ladder_unconstrained(x: Field, exp: Field) -> Field {
-    let exp_bits = exp.to_be_bits(256);
+    let exp_bits: [u1; 256] = exp.to_be_bits();
     let mut x1 = x;
     let mut x2 = x * x;
     let mut found = false;
@@ -29,8 +29,12 @@ unconstrained fn mont_ladder_unconstrained(x: Field, exp: Field) -> Field {
     x1
 }
 
-fn mont_ladder<S, R, A>(config: GriffinConfig<S, R, A>, x: Field) -> Field {
-    let y = mont_ladder_unconstrained(x, config.d_inv);
+#[field(bn254)]
+fn mont_ladder<let S: u32, let R: u32, let A: u32>(
+    config: GriffinConfig<S, R, A>,
+    x: Field,
+) -> Field {
+    let y = unsafe { mont_ladder_unconstrained(x, config.d_inv) };
     assert(x == y.pow_32(config.d));
     y
 }
@@ -51,7 +55,11 @@ pub(crate) fn affine_first_mat(mut state: [Field; 4]) -> [Field; 4] {
 }
 
 #[field(bn254)]
-pub(crate) fn affine<S>(mut state: [Field; S], rc: [Field; S], affine_mat: fn([Field; S]) -> [Field; S]) -> [Field; S] {
+pub(crate) fn affine<let S: u32>(
+    mut state: [Field; S],
+    rc: [Field; S],
+    affine_mat: fn([Field; S]) -> [Field; S],
+) -> [Field; S] {
     state = affine_mat(state);
     for i in 0..S {
         state[i] += rc[i];
@@ -59,7 +67,10 @@ pub(crate) fn affine<S>(mut state: [Field; S], rc: [Field; S], affine_mat: fn([F
     state
 }
 
-fn non_linear<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S]) -> [Field; S] {
+fn non_linear<let S: u32, let R: u32, let A: u32>(
+    config: GriffinConfig<S, R, A>,
+    mut state: [Field; S],
+) -> [Field; S] {
     let mut output = state;
     output[0] = mont_ladder(config, output[0]);
     output[1] = output[1].pow_32(config.d);
@@ -79,16 +90,20 @@ fn non_linear<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S]) ->
         y01_i += y0;
         let mut l = y01_i + state[r - 1];
         let l_square = square(l);
-        l *= config.alpha_beta[r-2][0];
+        l *= config.alpha_beta[r - 2][0];
         l += l_square;
-        l += config.alpha_beta[r-2][1];
+        l += config.alpha_beta[r - 2][1];
         output[r] *= l;
     }
     output
 }
 
 #[field(bn254)]
-pub(crate) fn permute<S, R, A>(config: GriffinConfig<S, R, A>, mut state: [Field; S], affine_mat: fn([Field; S]) -> [Field; S]) -> [Field; S] {
+pub(crate) fn permute<let S: u32, let R: u32, let A: u32>(
+    config: GriffinConfig<S, R, A>,
+    mut state: [Field; S],
+    affine_mat: fn([Field; S]) -> [Field; S],
+) -> [Field; S] {
     //no round constant
     state = affine_mat(state);
     for r in 0..R {
@@ -122,7 +137,10 @@ fn test_non_linear_4() {
 #[test]
 fn test_non_linear_8() {
     let config = crate::bn254::consts::x5_8_config();
-    let result = non_linear(config, [0x0180, 0x0120, 0x0180, 0x0120, 0x0180, 0x0120, 0x0180, 0x0120]);
+    let result = non_linear(
+        config,
+        [0x0180, 0x0120, 0x0180, 0x0120, 0x0180, 0x0120, 0x0180, 0x0120],
+    );
     assert(result[0] == 0x290e81e04f49eb2256b83a2e09d63fcd3ecfb0c77f3af3b1bfefdf6077e5b429);
     assert(result[1] == 0x000000000000000000000000000000000000000000000000000001cd52000000);
     assert(result[2] == 0x20e39fb5c23dd899498ebc4edf52492669492f78c8ba96a15164207f76fdd5e1);
